@@ -29,7 +29,7 @@ if (input_build == 38) {
 # ----------------------------------------
 paste("Reading data..")
 gwas_file <- vroom(gwas_file_in, 
-                   col_select = c(SNP, CHR, POS, A1FREQ, ALLELE0, ALLELE1, BETA, SE, LOG10P, P)) %>%
+                   col_select = c(SNP, CHR, POS, A1FREQ, ALLELE0, ALLELE1, BETA, SE, LOG10P, P), show_col_types=F) %>%
               dplyr::rename(BP = POS)
 
 

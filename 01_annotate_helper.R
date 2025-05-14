@@ -20,14 +20,14 @@ print(paste0("Output GWAS with rsIDs: ",gwas_file_out))
 
 print("Reading and processing GWAS data ..")
 gwas_data <- vroom::vroom(gwas_file_in,
-    col_select = c(ID, CHROM, GENPOS, A1FREQ, ALLELE0, ALLELE1, BETA, SE, LOG10P)) %>%
+    col_select = c(ID, CHROM, GENPOS, A1FREQ, ALLELE0, ALLELE1, BETA, SE, LOG10P), show_col_types=F) %>%
   dplyr::rename("CHR" = "CHROM", "POS" = "GENPOS") %>%
   dplyr::mutate(P = 10^-(LOG10P)) %>%
   dplyr::mutate(CHR = ifelse(CHR == 23, "X", CHR)) %>%
   dplyr::mutate(chr_pos = paste0(CHR, ":", POS))
 
 print("Reading and processing rsID annotation data ..")
-annot <- vroom::vroom(rsid_subset_file, col_names = c("SNP", "CHR", "POS", "ALLELE0", "ALLELE1"))
+annot <- vroom::vroom(rsid_subset_file, col_names = c("SNP", "CHR", "POS", "ALLELE0", "ALLELE1"), show_col_types=F)
 # tidy up multiallelic varaints (they are listed in a signle row e.g A:TA,TAA,TAAA - this will split them into multiple rows)
 annot <- annot %>% tidyr::separate_rows(ALLELE1, sep = ",") 
 
