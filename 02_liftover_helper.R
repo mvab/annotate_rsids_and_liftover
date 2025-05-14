@@ -1,6 +1,6 @@
-library(rtracklayer)
-library(dplyr)
-library(vroom)
+suppressPackageStartupMessages(library(rtracklayer))
+suppressPackageStartupMessages(library(dplyr))
+suppressPackageStartupMessages(library(vroom))
 
 # ----------------------------------------
 # Process arguments

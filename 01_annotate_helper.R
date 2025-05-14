@@ -1,7 +1,7 @@
-library(dplyr)
-library(vroom)
-library(readr)
-library(tidyr)
+suppressPackageStartupMessages(library(dplyr))
+suppressPackageStartupMessages(library(vroom))
+suppressPackageStartupMessages(library(readr))
+suppressPackageStartupMessages(library(tidyr))
 
 # ----------------------------------------
 # Process arguments
