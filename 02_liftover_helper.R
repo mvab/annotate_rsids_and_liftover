@@ -9,7 +9,7 @@ args <- commandArgs(trailingOnly = TRUE)
 input_build <- as.numeric(args[1])
 chain_files <- args[2] # refdata/ folder
 gwas_file_in <- args[3]
-print(paste0("Input GWAS in build ",input_build ,":"gwas_file_in))
+print(paste0("Input GWAS in build ",input_build ,":", gwas_file_in))
 gwas_file_out <- args[4]
 print(paste0("Output GWAS: ",gwas_file_out))
 
