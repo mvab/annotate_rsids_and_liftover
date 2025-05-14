@@ -2,7 +2,7 @@
 
 #### Workflow for performing LiftOver of genome build (37<->38) ####
 # to run:
-# ./02_liftover_GWAS.sh /path/to/your/GWAS.txt.gz 38
+# ./02_liftover_GWAS.sh /path/to/your/GWAS.txt.gz /path/to/refdata/ 38
 
 # Get arguments 
 input_GWAS=$1 # GWAS file (from previous step or separate file);
@@ -23,11 +23,11 @@ extension="${input_GWAS#$basename}"
 
 if [[ "$current_build" == 38 ]]; then 
     echo "---------- Running R script to perform liftover build 38 -> build 37 ---------- "
-    Rscript liftover_GWAS.R "$current_build" "$ref_data_dir" "$input_GWAS" "$basename"_b37.txt.gz
+    Rscript 02_liftover_helper.R "$current_build" "$ref_data_dir" "$input_GWAS" "$basename"_b37.txt.gz
 
 elif [[ "$current_build" == 37 ]]; then 
     echo "---------- Running R script to perform liftover build 37 -> build 38 ---------- "
-    Rscript liftover_GWAS.R "$current_build" "$ref_data_dir" "$input_GWAS" "$basename"_b38.txt.gz
+    Rscript 02_liftover_helper.R "$current_build" "$ref_data_dir" "$input_GWAS" "$basename"_b38.txt.gz
 else 
     echo "No or incorrect build specified; options: 38 or 37"
 fi
