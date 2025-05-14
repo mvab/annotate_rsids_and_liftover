@@ -1,10 +1,13 @@
 #!/bin/bash
 
-# Workflow for annotating GWAS with rsids from dbSNP
+#### Workflow for annotating GWAS with rsids from dbSNP ####
+# to run:
+# ./01_annotate_GWAS_with_rsids.sh /path/to/refdata/dbSNP151_refdata_build38.txt /path/to/your/GWAS.txt.gz
 
 # Get arguments 
 dbSNP_data=$1 # dbsnp ref file generated in the previous step
-raw_file=$2 # GWAS file; provide full path; assumes no dots in file name except the ones separating the extensions
+raw_file=$2 # GWAS file; provide full path; assumes no dots in file name except the ones separating the extension (e.g. ".txt.gz")
+            # GWAS file is expected to be in a standard REGENIE output (see README)
 
 # Separate GWAS file basename and extension
 basename="${raw_file%%.*}"
@@ -12,7 +15,7 @@ extension="${raw_file#$basename}"
 
 mkdir -p tmp_files
 
-# 1) Replace chr 23 in regenie output with X, because dbSNP data contains X
+# 1) Replace chr 23 in GWAS file with X, because dbSNP data contains it as X
 echo "---------- Preparing GWAS ----------"
 gunzip "$basename$extension" # unzip
 awk '{ if ($1 != 23) { print }
