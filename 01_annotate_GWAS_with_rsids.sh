@@ -28,13 +28,14 @@ echo "---------- Extracting GWAS SNPs from dbSNP ref file ---------- "
 
 # create a list of chr:pos to extract
 awk 'NR > 1 { print $1, $2}' OFS=':' tmp_files/tmp_file | sort | uniq > tmp_files/chr_pos_list.txt
+echo "part 1 done"
 
 # extract the list from ref file
 grep -Fwf tmp_files/chr_pos_list.txt  "$dbSNP_data" > tmp_files/chr_pos_list_w_rsid.txt
-
+echo "part 2 done"
 # split chr:pos:ref:alt into four columns in bash to save computing time in R
 cat tmp_files/chr_pos_list_w_rsid.txt | cut -d $'\t' -f 1,3 --output-delimiter=$'\t' | tr ':' '\t' >  tmp_files/chr_pos_list_w_rsid_split.txt
-
+echo "part 3 done"
 
 # 3) in R, merge rsids to GWAS file # this step is slow ~ 15 mins
 echo "---------- Running R script to annotate rsIDs ---------- "
