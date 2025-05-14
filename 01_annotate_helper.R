@@ -10,9 +10,9 @@ library(tidyr)
 args <- commandArgs(trailingOnly = TRUE)
 rsid_subset_file <- args[1] # "tmp_files/chr_pos_list_w_rsid_split.txt"
 gwas_file_in <- args[2]
-print(paste0("Input GWAS: ",gwas_file_in))
+print(paste0("Input GWAS to annotate: ",gwas_file_in))
 gwas_file_out <- args[3]
-print(paste0("Output GWAS: ",gwas_file_out))
+print(paste0("Output GWAS with rsIDs: ",gwas_file_out))
 
 # ----------------------------------------
 # Read and tidy data (GWAS and annotation)
