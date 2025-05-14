@@ -60,6 +60,6 @@ gwas_data_merged <- gwas_data_merged %>%
 print(head(gwas_data_merged))
 
 print("Saving ..")
-vroom::vroom_write(gwas_data2, file = gwas_file_out)
+vroom::vroom_write(gwas_data_merged, file = gwas_file_out)
 
 print("Finished adding rsID annotation to your GWAS. Yay!")
