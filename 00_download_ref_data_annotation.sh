@@ -11,7 +11,7 @@ mkdir -p refdata
 
 # extract only required columns:  rsid, chr:pos, chr:pos:ref:alt
 # NB the alt column contains multiallelic data stored per row comma-separated : e.g. could be C,G or TA,TAA
-zless refdata/00-All_b38.vcf.gz | grep -v "#" | awk -v OFS='\t' '{print $3, $1":"$2, $1":"$2":"$4":"$5}'  > refdata/dbSNP151_refdata_build38.txt
+zcat refdata/00-All_b38.vcf.gz | grep -v "#" | awk -v OFS='\t' '{print $3, $1":"$2, $1":"$2":"$4":"$5}'  > refdata/dbSNP151_refdata_build38.txt
 
 # optionally remove the original data to save space
 #rm refdata/00-All_b38.vcf.gz
