@@ -1,4 +1,4 @@
-# GWAS rsID annotation and LiftOver (WORK IN PROGRESS)
+# GWAS rsID annotation and LiftOver
 
 ![](fig.png)
 
