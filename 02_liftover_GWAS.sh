@@ -9,8 +9,8 @@ input_GWAS=$1 # GWAS file (from previous step or separate file);
               # provide full path; assumes no dots in file name except the ones separating the extension (e.g. ".txt.gz")
               # GWAS file is expected to be in a standard REGENIE output (see README)
 
-current_build=$2 # starting build; if 38, it will be converted to 37; if 37, it will be converted to 38
-ref_data_dir=$3 # can be refdata/ folder where 00_download_ref_data_liftover.sh saved file or your own location
+ref_data_dir=$2 # can be refdata/ folder where 00_download_ref_data_liftover.sh saved file or your own location
+current_build=$3 # starting build; if 38, it will be converted to 37; if 37, it will be converted to 38
 
 
 # Separate GWAS file basename and extension
