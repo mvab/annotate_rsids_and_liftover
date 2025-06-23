@@ -1,4 +1,4 @@
-# GWAS rsID annotation and LiftOver (WORK IN PROGRESS)
+# GWAS rsID annotation and LiftOver
 
 ![](fig.png)
 
@@ -104,3 +104,5 @@ Provide __full paths__ to input GWAS file (output from (1) or a separate file in
 ```
 
 *Output:* `/path/to/your/GWAS_rsids_b37.txt.gz`
+
+
