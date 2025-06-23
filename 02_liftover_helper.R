@@ -25,12 +25,20 @@ if (input_build == 38) {
 }
 
 # ----------------------------------------
-# Read inout GWAS data
+# Read input GWAS data
 # ----------------------------------------
 paste("Reading data..")
-gwas_file <- vroom(gwas_file_in, 
-                   col_select = c(SNP, CHR, POS, A1FREQ, ALLELE0, ALLELE1, BETA, SE, LOG10P, P), show_col_types=F) %>%
-              dplyr::rename(BP = POS)
+gwas_file <- vroom(gwas_file_in,  show_col_types=F) %>%
+	# rename if such cols exist:     
+	rename_with(
+        	~ case_when(
+        	. == "CHROM" ~ "CHR",
+        	. == "GENPOS" ~ "BP",
+        	. == "POS" ~ "BP",
+        	. == "ID" ~ "SNP",
+        	TRUE ~ .)) %>%
+	     dplyr::mutate(CHR = ifelse(CHR == 23, "X", CHR)) %>%             
+             dplyr::mutate(P = 10^-(LOG10P))  
 
 
 # ----------------------------------------
