@@ -21,7 +21,11 @@ Annotation and liftover can be done as a part of one workflow or completely inde
 
 ### Obtaining genome reference data
 
-Both data will be downloaded into `refdata/` folder in the working directory (i.e. this cloned repo).
+Both datasets will be downloaded into `refdata/` folder in the working directory (i.e. this cloned repo).
+
+```
+NB: if you are at Exeter, the data download step can be skipped - simply create a symbolic link to data in /slade/projects/Public_Ref_Datasets/dbsnp/annotate_rsids_and_liftover/refdata/
+```
 
 #### Data for rsID annotation
 
