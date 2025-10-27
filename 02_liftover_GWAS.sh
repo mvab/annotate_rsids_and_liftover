@@ -31,3 +31,5 @@ elif [[ "$current_build" == 37 ]]; then
 else 
     echo "No or incorrect build specified; options: 38 or 37"
 fi
+
+rm -r tmp_files

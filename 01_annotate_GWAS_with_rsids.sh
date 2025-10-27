@@ -1,5 +1,5 @@
 #!/bin/bash
-
+#
 #### Workflow for annotating GWAS with rsids from dbSNP ####
 # to run:
 # ./01_annotate_GWAS_with_rsids.sh /path/to/refdata/dbSNP151_refdata_build38.txt /path/to/your/GWAS.txt.gz
@@ -39,5 +39,6 @@ echo "part 3 done"
 
 # 3) in R, merge rsids to GWAS file # this step is slow ~ 15 mins
 echo "---------- Running R script to annotate rsIDs ---------- "
-#module load R-bundle-Packages/4.3.2-20240227-gfbf-2023a (for use on Exeter servers only - uncomment)
+module load R-bundle-Packages/4.3.2-20240227-gfbf-2023a
+# (above for use on Exeter servers only - uncomment)
 Rscript 01_annotate_helper.R tmp_files/chr_pos_list_w_rsid_split.txt "$basename$extension" "$basename"_rsids"$extension"
