@@ -1,6 +1,7 @@
 suppressPackageStartupMessages(library(rtracklayer))
 suppressPackageStartupMessages(library(dplyr))
 suppressPackageStartupMessages(library(vroom))
+suppressPackageStartupMessages(library(tidyr))
 
 # ----------------------------------------
 # Process arguments
@@ -96,11 +97,19 @@ if (input_build == 38) {
 # Tidy up and save
 # ----------------------------------------
 paste("Updating rsID and saving")
+
+# identify and remove positions that got lifted incorrectly (e.g. position was not mapped in b37)
+gwas_no_rs<- gwas_file_lifted %>% filter(!grepl("rs", SNP)) %>%  separate(SNP, into=c("chr", "pos"), sep=":", remove=F)
+
+to_exclude_chr_mismatch <- gwas_no_rs %>% filter(CHR!=chr) # chr is diff between builds
+to_exclude_not_lifted   <- gwas_no_rs %>% filter(CHR==chr & POS==pos)  # chr and pos exactly the same in two builds
+
+paste("Excluding positions due to CHR mismatch after liftover: ", nrow(to_exclude_chr_mismatch))
+
 # for missing rsids use chr:pos
 gwas_file_lifted <- gwas_file_lifted %>%
-  mutate(chr_pos = paste0(CHR, ":", POS)) %>%
-  mutate(SNP = coalesce(SNP, chr_pos)) %>%
-  select(-chr_pos)
+  filter(!SNP %in% c(to_exclude_chr_mismatch$SNP)) %>%
+  mutate(SNP = ifelse(grepl("rs", SNP), SNP, paste0(CHR, ":", POS))) 
 
 vroom_write(gwas_file_lifted, gwas_file_out)
 print("Finished liftover.")
