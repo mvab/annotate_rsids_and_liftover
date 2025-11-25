@@ -42,3 +42,5 @@ echo "---------- Running R script to annotate rsIDs ---------- "
 module load R-bundle-Packages/4.3.2-20240227-gfbf-2023a
 # (above for use on Exeter servers only - uncomment)
 Rscript 01_annotate_helper.R tmp_files/chr_pos_list_w_rsid_split.txt "$basename$extension" "$basename"_rsids"$extension"
+
+rm -r tmp_files/
