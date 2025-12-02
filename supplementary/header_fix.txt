@@ -1,0 +1,1 @@
+##INFO=<ID=RS,Number=1,Type=String,Description="dbSNP ID">
