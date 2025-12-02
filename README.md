@@ -23,22 +23,22 @@ Annotation and liftover can be done as a part of one workflow or completely inde
 
 Both datasets will be downloaded into `refdata/` folder in the working directory (i.e. this cloned repo).
 
-```
-NB: if you are at Exeter, the data download step can be skipped - simply create a symbolic link to data in /slade/projects/Public_Ref_Datasets/dbsnp/annotate_rsids_and_liftover/refdata/
-```
+
+**Please note:** if you are in **Exeter**, the data download step can be skipped - simply create a symbolic link to data in `/slade/projects/Public_Ref_Datasets/dbsnp/annotate_rsids_and_liftover/refdata/` (`ln -s`)
+
 
 #### Data for rsID annotation
 
-Download dbSNP v151 data in VCF format, and subset it to columns that are required for annotation.
+Download dbSNP v157 data in VCF format (for the specified genome build 37/38), and subset it to only required for annotation columns in .txt format.
 
 *To run:* (recommended to run with `nohup` or `screen` as it might take a while)
 
 ```
-./00_download_ref_data_annotation.sh 
+./00_download_ref_data_annotation.sh 38 # specify build 38 or 37
 ```
  
 *Output:*
-`refdata/dbSNP151_refdata_build38.txt`
+`refdata/dbSNP157_refdata_build38.txt`
 
 #### Data for LiftOver
 
@@ -79,7 +79,7 @@ _Assumptions:_
 Provide __full paths__ to annotaion file and input GWAS file:
 
 ```
-./01_annotate_GWAS_with_rsids.sh /path/to/refdata/dbSNP151_refdata_build38.txt /path/to/your/GWAS.txt.gz
+./01_annotate_GWAS_with_rsids.sh /path/to/refdata/dbSNP157_refdata_build38.txt /path/to/your/GWAS.txt.gz
 ```
 
 *Output:* `/path/to/your/GWAS_rsids.txt.gz`
