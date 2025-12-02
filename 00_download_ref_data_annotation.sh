@@ -2,6 +2,7 @@
 
 # Download dbSNP ref data that contains chr:pos -> rsid mapping;
 # This refdata will be used to annotate a GWAS that does not contain rsIDs
+# The current default is to use dbSNPv157; but there is an option to use v151 (this was used for a while by multiple people, and is kept here as a legacy backup)
 # ./00_download_ref_data_annotation.sh 38 157
 
 # load bcftools  (Exeter users only)
@@ -16,22 +17,22 @@ dbSNP_version="${2:-157}" # v157 will be used as default if nothing is specifed
 ## 1) Download specified annotation data
 if [[ "$build_needed" == 38 && "$dbSNP_version" == 151 ]]; then
     echo "Downloading dbSNP data (version $dbSNP_version) for build $build_needed (VCF format)"
-#    wget -c https://ftp.ncbi.nlm.nih.gov/snp/organisms/human_9606_b151_GRCh38p7/VCF/00-All.vcf.gz -O refdata/00-All_b38.vcf.gz
+    wget -c https://ftp.ncbi.nlm.nih.gov/snp/organisms/human_9606_b151_GRCh38p7/VCF/00-All.vcf.gz -O refdata/00-All_b38.vcf.gz
 
 elif [[ "$build_needed" == 37 && "$dbSNP_version" == 151 ]]; then
     echo "Downloading dbSNP data (version $dbSNP_version) for build $build_needed (VCF format)"
-#    wget -c https://ftp.ncbi.nlm.nih.gov/snp/organisms/human_9606_b151_GRCh37p13/VCF/00-All.vcf.gz -O refdata/00-All_b37.vcf.gz
+    wget -c https://ftp.ncbi.nlm.nih.gov/snp/organisms/human_9606_b151_GRCh37p13/VCF/00-All.vcf.gz -O refdata/00-All_b37.vcf.gz
 
 
 elif [[ "$build_needed" == 38 && "$dbSNP_version" == 157 ]]; then
     echo "Downloading dbSNP data (version $dbSNP_version) for build $build_needed (VCF format)"
-#    wget -c https://ftp.ncbi.nih.gov/snp/archive/b157/VCF/GCF_000001405.40.gz -O refdata/00-All_b38_unprocessed.vcf.gz
-#    wget -c https://ftp.ncbi.nih.gov/snp/archive/b157/VCF/GCF_000001405.40.gz.tbi -O refdata/00-All_b38_unprocessed.vcf.gz.tbi
+    wget -c https://ftp.ncbi.nih.gov/snp/archive/b157/VCF/GCF_000001405.40.gz -O refdata/00-All_b38_unprocessed.vcf.gz
+    wget -c https://ftp.ncbi.nih.gov/snp/archive/b157/VCF/GCF_000001405.40.gz.tbi -O refdata/00-All_b38_unprocessed.vcf.gz.tbi
 
 elif [[ "$build_needed" == 37 && "$dbSNP_version" == 157 ]]; then
     echo "Downloading dbSNP data (version $dbSNP_version) for build $build_needed (VCF format)"
-#    wget -c https://ftp.ncbi.nih.gov/snp/archive/b157/VCF/GCF_000001405.25.gz -O refdata/00-All_b37_unprocessed.vcf.gz
-#    wget -c https://ftp.ncbi.nih.gov/snp/archive/b157/VCF/GCF_000001405.25.gz.tbi -O refdata/00-All_b37_unprocessed.vcf.gz.tbi
+    wget -c https://ftp.ncbi.nih.gov/snp/archive/b157/VCF/GCF_000001405.25.gz -O refdata/00-All_b37_unprocessed.vcf.gz
+    wget -c https://ftp.ncbi.nih.gov/snp/archive/b157/VCF/GCF_000001405.25.gz.tbi -O refdata/00-All_b37_unprocessed.vcf.gz.tbi
 
 else
     echo "[ERROR] Invalid build: $build_needed (expected 37 or 38) or Invalid dbSNP version: $dbSNP_version (expected 151 or 157)"
@@ -68,6 +69,6 @@ echo "Extracting the required annotation columns from dbSNP data (version $dbSNP
 bcftools query -f '%ID\t%CHROM:%POS\t%CHROM:%POS:%REF:%ALT\n' refdata/00-All_b"$build_needed".vcf.gz  > refdata/dbSNP"$dbSNP_version"_refdata_build"$build_needed".txt
 
 # optionally remove the original data to save space
-# rm refdata/*.vcf.gz*
+rm refdata/*.vcf.gz*
 
 echo "=== done ==="
